@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Fri Nov 16 11:19:22 2012
+# Created: Tue Nov 20 12:36:16 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ class Ui_Assassins(object):
         self.centralwidget = QtGui.QWidget(Assassins)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.layoutWidget = QtGui.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(40, 70, 501, 29))
+        self.layoutWidget.setGeometry(QtCore.QRect(40, 60, 501, 29))
         self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setMargin(0)
@@ -40,7 +40,7 @@ class Ui_Assassins(object):
         self.WybierzButton.setObjectName(_fromUtf8("WybierzButton"))
         self.horizontalLayout.addWidget(self.WybierzButton)
         self.layoutWidget1 = QtGui.QWidget(self.centralwidget)
-        self.layoutWidget1.setGeometry(QtCore.QRect(40, 130, 501, 26))
+        self.layoutWidget1.setGeometry(QtCore.QRect(40, 140, 501, 26))
         self.layoutWidget1.setObjectName(_fromUtf8("layoutWidget1"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.layoutWidget1)
         self.horizontalLayout_2.setMargin(0)
@@ -65,6 +65,19 @@ class Ui_Assassins(object):
         self.pytanieEdit = QtGui.QLineEdit(self.layoutWidget2)
         self.pytanieEdit.setObjectName(_fromUtf8("pytanieEdit"))
         self.horizontalLayout_3.addWidget(self.pytanieEdit)
+        self.layoutWidget3 = QtGui.QWidget(self.centralwidget)
+        self.layoutWidget3.setGeometry(QtCore.QRect(40, 100, 501, 29))
+        self.layoutWidget3.setObjectName(_fromUtf8("layoutWidget3"))
+        self.horizontalLayout_6 = QtGui.QHBoxLayout(self.layoutWidget3)
+        self.horizontalLayout_6.setMargin(0)
+        self.horizontalLayout_6.setObjectName(_fromUtf8("horizontalLayout_6"))
+        self.StartButton = QtGui.QPushButton(self.layoutWidget3)
+        self.StartButton.setObjectName(_fromUtf8("StartButton"))
+        self.horizontalLayout_6.addWidget(self.StartButton)
+        self.progressBar = QtGui.QProgressBar(self.layoutWidget3)
+        self.progressBar.setProperty("value", 0)
+        self.progressBar.setObjectName(_fromUtf8("progressBar"))
+        self.horizontalLayout_6.addWidget(self.progressBar)
         Assassins.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(Assassins)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -79,4 +92,5 @@ class Ui_Assassins(object):
         self.WybierzButton.setText(QtGui.QApplication.translate("Assassins", "Wybierz....", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("Assassins", "Odpowiedz:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Assassins", "Pytanie:", None, QtGui.QApplication.UnicodeUTF8))
+        self.StartButton.setText(QtGui.QApplication.translate("Assassins", "Start", None, QtGui.QApplication.UnicodeUTF8))
 
