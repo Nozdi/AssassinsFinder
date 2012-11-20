@@ -9,11 +9,6 @@ class finder:
             if s[0].isupper() and s not in self.ignore: self.dane.append(s)
         return self.dane
 
-    def find(self,zdanie):
-        for s in zdanie.split():
-            if s[0].isupper() and s not in self.ignore: self.dane.append(s)
-        return self.dane
-    
     def checker(self, duze):
         import os	
         print(duze)
