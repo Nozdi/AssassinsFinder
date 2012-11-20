@@ -18,4 +18,3 @@ class finder:
 			tmp=f2.readline()
 			if int(tmp)>0:
 				print(i,"JEST!")    
-		
