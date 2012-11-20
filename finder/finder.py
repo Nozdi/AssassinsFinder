@@ -3,6 +3,7 @@ class finder:
     def __init__(self):
         self.name = ''
         self.place = []
+        self.city = ''
 
     # Jesli UpperCase przed w to jest to imie(nazwisko), inaczej po w ostatni upper to imie(nazwisko)
     def find(self,zdanie):
@@ -15,20 +16,36 @@ class finder:
         if not self.name: #jesli nie ma
             self.name = self.place[-1]
             self.place = self.place[:-1]
+        self.city = " ".join(self.place)
 
     def checker(self):
-        for line in open("../bazy/finbaza.fred"):
-            if line.startswith(" ".join(self.place)):
+        found = False
+        for line in open("../bazy/finbaza.fred1"):
+            if not found and line.startswith(self.city):
+                found = True
+                self.city = line
                 print(line)
-        print(self.name, " ".join(self.place))
+        if not found:
+            for line in open("../bazy/finbaza.fred1"):
+                if not found and line.startswith(self.city[:-1]):
+                    found = True
+                    print(line)
+                    self.city = line
+            if not found:
+                for line in open("../bazy/finbaza.fred1"):
+                    if not found and line.startswith(self.city[:-2]):
+                        found = True
+                        print(line)
+                        self.city = line
+        print(self.name, self.city)
 
-
-x = finder()
-x.find("Kto zabil Kennediego w Dallas")
-x.checker()
-y = finder()
-y.find("Kto zabil w Dallas Kennediego")
-y.checker()
-z = finder()
-z.find("Kto zabil Fliegera w Santa Clara")
-z.checker()
+if __name__ == '__main__':
+    x = finder()
+    x.find("Kto zabil Kennediego w Bydgoszczy")
+    x.checker()
+    y = finder()
+    y.find("Kto zabil w Dallas Kennediego")
+    y.checker()
+    z = finder()
+    z.find("Kto zabil Fliegera w New York")
+    z.checker()
