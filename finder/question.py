@@ -7,6 +7,8 @@ class Question:
         self.name = ''
         self.place = []
         self.city = ''
+        self.find()
+        self.checker()
 
     # Jesli UpperCase przed w to jest to imie(nazwisko), inaczej po w ostatni upper to imie(nazwisko)
     def find(self):
@@ -49,11 +51,5 @@ class Question:
 
 if __name__ == '__main__':
     x = Question("Kto zabil Kennedy'ego w Bydgoszczy")
-    x.find()
-    x.checker()
     y = Question("Kto zabil w Dallas Kennedy'ego")
-    y.find()
-    y.checker()
-    z = Question("Kto zabil Fliegera w New York")
-    z.find()
-    z.checker()
+    z = Question("Kto zabil Flieger w New York")

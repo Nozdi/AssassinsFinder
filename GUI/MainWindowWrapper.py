@@ -18,6 +18,4 @@ class MainWindowWrapper(QMainWindow):
         pytanie = self.ui.pytanieEdit.text()
         from finder.question import Question
         x = Question(pytanie)
-        x.find()
-        x.checker()
         self.ui.OdpowiedzLine.setText("Zginał pan %s w %s"%(x.name, x.city))
