@@ -17,7 +17,7 @@ class MainWindowWrapper(QMainWindow):
         if directory:
             self.ui.SciezkaLine.setText(directory)
     def start(self):
-        progess = 0
+        self.ui.progressBar.setValue(0)
         pytanie = self.ui.pytanieEdit.text()
         que = Question(pytanie)
         plik = self.ui.SciezkaLine.text()
@@ -29,13 +29,13 @@ class MainWindowWrapper(QMainWindow):
                 czas = znajdz_czas(tekst)
                 self.ui.progressBar.setValue(34)
                 odmiany_nazwisk = odmiany_synonimow([que.name])
-                self.ui.progressBar.setVaule(43)
+                self.ui.progressBar.setValue(43)
                 odmiany_miasta = odmiany_synonimow([que.city])
-                self.ui.progress.setValue(66)
+                self.ui.progressBar.setValue(66)
                 probably_killa = bloody_shot(czas, odmiany_nazwisk, odmiany_miasta)
-                self.ui.progress.setValue(99)
+                self.ui.progressBar.setValue(99)
                 self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, whos_da_killa(probably_killa), que.city))
-                self.ui.progressBar.setValue(0)
+                self.ui.progressBar.setValue(100)
             else:
                 QMessageBox.critical(self, "Problem", "Presupozycja nie może zostać potwierdzona!!", QMessageBox.Ok)
         else:
