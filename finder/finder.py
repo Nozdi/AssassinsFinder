@@ -47,6 +47,13 @@ def base_form(name):
                 return line.split(', ')[0]
     return name
 
+def potw_predy(name,miejsce):
+    for line in znajdz_czas():
+        if name and miejsce in line:
+		return True
+    
+
+
 
 #czas = input("podaj czasownik: ")
 if __name__ == '__main__':
