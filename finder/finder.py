@@ -1,4 +1,4 @@
-class finder:
+class question:
     """Potwierdza presupozycje pytania"""
     def __init__(self):
         self.name = ''
@@ -40,12 +40,12 @@ class finder:
         print(self.name, self.city)
 
 if __name__ == '__main__':
-    x = finder()
+    x = question()
     x.find("Kto zabil Kennediego w Bydgoszczy")
     x.checker()
-    y = finder()
+    y = question()
     y.find("Kto zabil w Dallas Kennediego")
     y.checker()
-    z = finder()
+    z = question()
     z.find("Kto zabil Fliegera w New York")
     z.checker()
