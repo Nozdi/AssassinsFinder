@@ -16,7 +16,7 @@ class MainWindowWrapper(QMainWindow):
             self.ui.SciezkaLine.setText(directory)
     def start(self):
         pytanie = self.ui.pytanieEdit.text()
-        from finder.finder import Question
+        from finder.question import Question
         x = Question(pytanie)
         x.find()
         x.checker()

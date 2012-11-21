@@ -47,19 +47,26 @@ def base_form(name):
                 return line.split(', ')[0]
     return name
 
-def potw_predy(name,miejsce):
-    for line in znajdz_czas():
-        if name and miejsce in line:
-		return True
+def potw_predy(name, miejsce):
+    ifname = False
+    ifplace = False
+    for czas, line in znajdz_czas():
+        if name in line:
+            ifname = True
+        if miejsce in line:
+            ifplace = True
+    if ifname and ifplace: return 3
+    elif ifname: return 2
+    elif ifplace: return 1
+    else: return 0
     
-
-
 
 #czas = input("podaj czasownik: ")
 if __name__ == '__main__':
-    print(base_form("Kennedy'ego"))
-    print(base_form("Piotrka"))
+    #print(base_form("Kennedy'ego"))
+    #print(base_form("Piotrka"))
     #znajdz_czas()
+    print(potw_predy("Kennedy", "Dallas"))
     #print(znajdz_czas())
     #czas = 'zabił'
     #with open("./bazy/zabil.all", "w") as o:

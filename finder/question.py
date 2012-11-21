@@ -1,4 +1,4 @@
-from finder import base_form
+from .finder import base_form
 
 class Question:
     """Potwierdza presupozycje pytania"""
