@@ -68,7 +68,19 @@ def whos_da_killa(killers):
     import collections
     x = collections.Counter(killer)
     return x.most_common(1)[0][0]
+
+def diffrenet_split(text):
+    import re
+    x = re.split("\s[a-z]*", text)
+    for nr, elem in enumerate(x):
+        if elem == "": 
+            x[nr]='\n'
+    return [elem.strip(" ") for elem in " ".join(x).split("\n")]
         
+
+        
+    
+
 #czas = input("podaj czasownik: ")
 if __name__ == '__main__':
     #print(base_form("Kennedy'ego"))
