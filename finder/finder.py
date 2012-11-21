@@ -61,9 +61,11 @@ def bloody_shot(zdania, osoba, miejsce):
         for slowo in tmp.split():
             slowo = slowo.rstrip(',"')
             if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and 'przez' in elem[1]: killer.append(slowo)
-
     return killer
 
+def whos_da_killa(killers):
+        killer = [base_form(elem) for elem in killers]
+        
 #czas = input("podaj czasownik: ")
 if __name__ == '__main__':
     #print(base_form("Kennedy'ego"))
