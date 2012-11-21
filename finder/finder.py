@@ -18,8 +18,6 @@ def synonimy(slowo):
             ret.append(linia)
     return ';'.join(ret).replace("\n", "").split(';')
 
-text = podaj_zdania(open("Kennedy.txt").read())
-
 def odmiany_synonimow(synlist):
     ret = []
     for elem in synlist:
@@ -28,24 +26,28 @@ def odmiany_synonimow(synlist):
                 if elem in linia.split(', '):
                     ret.append(linia)
     return ', '.join(ret).replace("\n", "").split(', ')
-                
 
-def znajdz_czas(czas):
+text = podaj_zdania(open("Kennedy.txt").read())
+
+def znajdz_czas():
     ret = []
-    ltemp = synonimy(czas)
-    for slowo in ltemp:
-        for elem in text:
+    with open("./bazy/zabil.all") as o:
+        zabic = o.read().split("\n")[:-1]
+    for elem in text:
+        for slowo in zabic:
             if slowo in elem:
-                   ret.append(elem) 
+                ret.append(elem) 
     return ret
 
 
 #czas = input("podaj czasownik: ")
 if __name__ == '__main__': 
-    czas = 'zabił'
-    with open("../bazy/zabil.all", "w") as o:
-        for slowo in  odmiany_synonimow(synonimy(czas)):
-            print(slowo, file=o)
+    #znajdz_czas()
+    print(znajdz_czas())
+    #czas = 'zabił'
+    #with open("../bazy/zabil.all", "w") as o:
+    #    for slowo in  odmiany_synonimow(synonimy(czas)):
+    #        print(slowo, file=o)
 #print(znajdz_czas(czas))
 #print(podaj_zadania("Avdads.\nasdas asdkjsa.\n asdjkasdk.\n"))
 #x = podaj_zadania(open("Kennedy.txt").read())
