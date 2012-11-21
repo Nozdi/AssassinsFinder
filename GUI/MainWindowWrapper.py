@@ -9,7 +9,15 @@ class MainWindowWrapper(QMainWindow):
         self.ui = Ui_Assassins()
         self.ui.setupUi(self)
         QObject.connect(self.ui.WybierzButton, SIGNAL('clicked()'), self.wybierz)
+        QObject.connect(self.ui.StartButton, SIGNAL('clicked()'), self.start)
     def wybierz(self):
         directory = QFileDialog.getOpenFileName(self, QDir.homePath(), QDir.homePath())
         if directory:
             self.ui.SciezkaLine.setText(directory)
+    def start(self):
+        pytanie = self.ui.pytanieEdit.text()
+        from finder.finder import Question
+        x = Question(pytanie)
+        x.find()
+        x.checker()
+        self.ui.OdpowiedzLine.setText("Zginał pan %s w %s"%(x.name, x.city))

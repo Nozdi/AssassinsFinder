@@ -1,7 +1,7 @@
 class Question:
     """Potwierdza presupozycje pytania"""
     def __init__(self, zdanie):
-        self.zdanie = zdanie
+        self.zdanie = zdanie.replace("?","")
         self.name = ''
         self.place = []
         self.city = ''
@@ -20,25 +20,27 @@ class Question:
         self.city = " ".join(self.place)
 
     def checker(self):
+        directory = "./bazy/finbaza.fred1"
         found = False
-        for line in open("../bazy/finbaza.fred1"):
+        for line in open(directory):
             if not found and line.startswith(self.city):
                 found = True
                 self.city = line
                 print(line)
         if not found:
-            for line in open("../bazy/finbaza.fred1"):
+            for line in open(directory):
                 if not found and line.startswith(self.city[:-1]):
                     found = True
                     print(line)
                     self.city = line
             if not found:
-                for line in open("../bazy/finbaza.fred1"):
+                for line in open(directory):
                     if not found and line.startswith(self.city[:-2]):
                         found = True
                         print(line)
                         self.city = line
         print(self.name, self.city)
+
 
 if __name__ == '__main__':
     x = Question("Kto zabil Kennediego w Bydgoszczy")
