@@ -20,9 +20,9 @@ def odmiany_synonimow(synlist):
                     ret.append(linia)
     return ', '.join(ret).replace("\n", "").split(', ')
 
-text = podaj_zdania(open("Kennedy.txt").read())
+#text = podaj_zdania(open("Kennedy.txt").read())
 #text = podaj_zdania(open("narutowicz.txt").read())
-#text = podaj_zdania(open("lennon.txt").read())
+text = podaj_zdania(open("lennon.txt").read())
 def znajdz_czas():
     ret = []
     with open("./bazy/zabil.all") as o:
@@ -52,15 +52,24 @@ def potw_predy(name, miejsce):
     elif ifname: return 2
     elif ifplace: return 1
     else: return 0
-    
+
+def bloody_shot(zdania, osoba, miejsce):
+    killer = []
+    for elem in zdania:
+        tmp = elem[1][elem[1].find(elem[0])+len(elem[0])+1:]
+        for slowo in tmp.split():
+            if slowo[0].isupper() and slowo.replace(',', '') not in osoba and slowo.replace(',','') not in miejsce: killer.append(slowo)
+
+    return killer
 
 #czas = input("podaj czasownik: ")
 if __name__ == '__main__':
     #print(base_form("Kennedy'ego"))
     #print(base_form("Piotrka"))
     #znajdz_czas()
-    print(potw_predy("Kennedy", "Dallas"))
+    #print(potw_predy("Kennedy", "Dallas"))
     #print(znajdz_czas())
+    print(bloody_shot(znajdz_czas(), odmiany_synonimow(['Kennedy']), odmiany_synonimow(['Dallas']) ))
     #czas = 'zabił'
     #with open("./bazy/zabil.all", "w") as o:
     #  for slowo in  odmiany_synonimow(synonimy(czas)):
