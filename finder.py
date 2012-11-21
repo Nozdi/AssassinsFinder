@@ -29,7 +29,7 @@ def odmiany_synonimow(synlist):
             for linia in o.readlines():
                 if elem in linia.split(', '):
                     ret.append(linia)
-    return ', '.join(ret).split(', ')
+    return ', '.join(ret).replace("\n", "").split(', ')
                 
 
 def znajdz_czas(czas):
