@@ -1,54 +1,51 @@
-class Question:
-    """Potwierdza presupozycje pytania"""
-    def __init__(self, zdanie):
-        self.zdanie = zdanie.replace("?","")
-        self.name = ''
-        self.place = []
-        self.city = ''
+def podaj_zdania(text):
+    text = text.replace("\n", "")
+    return text.split(".")
 
-    # Jesli UpperCase przed w to jest to imie(nazwisko), inaczej po w ostatni upper to imie(nazwisko)
-    def find(self):
-        index = self.zdanie.find("w")
-        city = self.zdanie[index+1:] #zdanie po 'w' 
-        self.place = city.split() #mozliwe miasta
-        for s in self.zdanie[:index].split(): #czy jest przed w cos z duzej?
-            if s[0].isupper() and s != "Kto": 
-                self.name = s
-        if not self.name: #jesli nie ma
-            self.name = self.place[-1]
-            self.place = self.place[:-1]
-        self.city = " ".join(self.place)
+def odmiany(slowo):
+    ret = ''
+    with open("./bazy/dane.odmian") as o:
+        for linia in o.readlines():
+            cos = linia.split(', ')
+            if slowo in cos:
+                return cos[0]
 
-    def checker(self):
-        directory = "./bazy/finbaza.fred1"
-        found = False
-        for line in open(directory):
-            if not found and line.startswith(self.city):
-                found = True
-                self.city = line
-                print(line)
-        if not found:
-            for line in open(directory):
-                if not found and line.startswith(self.city[:-1]):
-                    found = True
-                    print(line)
-                    self.city = line
-            if not found:
-                for line in open(directory):
-                    if not found and line.startswith(self.city[:-2]):
-                        found = True
-                        print(line)
-                        self.city = line
-        print(self.name, self.city)
+def synonimy(slowo):
+    ret = []
+    stemp = odmiany(slowo)
+    for linia in open("./bazy/dane.syn").readlines():
+        if stemp in linia:
+            ret.append(linia)
+    return ';'.join(ret).replace("\n", "").split(';')
+
+text = podaj_zdania(open("Kennedy.txt").read())
+
+def odmiany_synonimow(synlist):
+    ret = []
+    for elem in synlist:
+        with open("./bazy/dane.odmian") as o:
+            for linia in o.readlines():
+                if elem in linia.split(', '):
+                    ret.append(linia)
+    return ', '.join(ret).replace("\n", "").split(', ')
+                
+
+def znajdz_czas(czas):
+    ret = []
+    ltemp = synonimy(czas)
+    for slowo in ltemp:
+        for elem in text:
+            if slowo in elem:
+                   ret.append(elem) 
+    return ret
 
 
-if __name__ == '__main__':
-    x = Question("Kto zabil Kennediego w Bydgoszczy")
-    x.find()
-    x.checker()
-    y = Question("Kto zabil w Dallas Kennediego")
-    y.find()
-    y.checker()
-    z = Question("Kto zabil Fliegera w New York")
-    z.find()
-    z.checker()
+#czas = input("podaj czasownik: ")
+if __name__ == '__main__': 
+    czas = 'zabił'
+    with open("../bazy/zabil.all", "w") as o:
+        for slowo in  odmiany_synonimow(synonimy(czas)):
+            print(slowo, file=o)
+#print(znajdz_czas(czas))
+#print(podaj_zadania("Avdads.\nasdas asdkjsa.\n asdjkasdk.\n"))
+#x = podaj_zadania(open("Kennedy.txt").read())
