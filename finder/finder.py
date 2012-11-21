@@ -1,4 +1,4 @@
-class question:
+class Question:
     """Potwierdza presupozycje pytania"""
     def __init__(self):
         self.name = ''
@@ -40,12 +40,12 @@ class question:
         print(self.name, self.city)
 
 if __name__ == '__main__':
-    x = question()
+    x = Question()
     x.find("Kto zabil Kennediego w Bydgoszczy")
     x.checker()
-    y = question()
+    y = Question()
     y.find("Kto zabil w Dallas Kennediego")
     y.checker()
-    z = question()
+    z = Question()
     z.find("Kto zabil Fliegera w New York")
     z.checker()
