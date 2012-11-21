@@ -2,18 +2,19 @@ from .finder import base_form
 
 class Question:
     """Potwierdza presupozycje pytania"""
-    def __init__(self, zdanie):
+    def __init__(self, zdanie = ""):
         self.zdanie = zdanie.replace("?","")
         self.name = ''
         self.place = []
         self.city = ''
-        self.find()
-        self.checker()
+        if zdanie:
+            self.find()
+            self.checker()
 
     # Jesli UpperCase przed w to jest to imie(nazwisko), inaczej po w ostatni upper to imie(nazwisko)
     def find(self):
         index = self.zdanie.find("w")
-        city = self.zdanie[index+1:] #zdanie po 'w' 
+        city = self.zdanie[index + 1:] #zdanie po 'w' 
         self.place = city.split() #mozliwe miasta
         for s in self.zdanie[:index].split(): #czy jest przed w cos z duzej?
             if s[0].isupper() and s != "Kto": 
@@ -32,22 +33,17 @@ class Question:
             if not found and line.startswith(self.city):
                 found = True
                 self.city = line
-                print(line)
         if not found:
             for line in open(directory):
                 if not found and line.startswith(self.city[:-1]):
                     found = True
-                    print(line)
                     self.city = line
             if not found:
                 for line in open(directory):
                     if not found and line.startswith(self.city[:-2]):
                         found = True
-                        print(line)
                         self.city = line
-        print(self.name, self.city)
     
-
 
 if __name__ == '__main__':
     x = Question("Kto zabil Kennedy'ego w Bydgoszczy")

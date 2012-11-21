@@ -20,11 +20,11 @@ def odmiany_synonimow(synlist):
                     ret.append(linia)
     return ', '.join(ret).replace("\n", "").split(', ')
 
-text = podaj_zdania(open("Kennedy.txt").read())
+#text = podaj_zdania(open("Kennedy.txt").read())
 #text = podaj_zdania(open("narutowicz.txt").read())
 #text = podaj_zdania(open("lennon.txt").read())
 
-def znajdz_czas():
+def znajdz_czas(text):
     ret = []
     with open("./bazy/zabil.all") as o:
         zabic = o.read().split("\n")[:-1]
@@ -41,10 +41,10 @@ def base_form(name):
                 return line.split(', ')[0]
     return name
 
-def potw_presup(name, miejsce):
+def potw_presup(name, miejsce, tekst):
     ifname = False
     ifplace = False
-    for czas, line in znajdz_czas():
+    for czas, line in znajdz_czas(tekst):
         if name in line:
             ifname = True
         if miejsce in line:
@@ -64,7 +64,10 @@ def bloody_shot(zdania, osoba, miejsce):
     return killer
 
 def whos_da_killa(killers):
-        killer = [base_form(elem) for elem in killers]
+    killer = [base_form(elem) for elem in killers]
+    import collections
+    x = collections.Counter(killer)
+    return x.most_common(1)[0][0]
         
 #czas = input("podaj czasownik: ")
 if __name__ == '__main__':
@@ -73,7 +76,7 @@ if __name__ == '__main__':
     #znajdz_czas()
     #print(potw_predy("Kennedy", "Dallas"))
     #print(znajdz_czas())
-    print(bloody_shot(znajdz_czas(), odmiany_synonimow(['Kennedy']), odmiany_synonimow(['Dallas']) ))
+    print(whos_da_killa(bloody_shot(znajdz_czas(), odmiany_synonimow(['Kennedy']), odmiany_synonimow(['Dallas']) )))
     #czas = 'zabił'
     #with open("./bazy/zabil.all", "w") as o:
     #  for slowo in  odmiany_synonimow(synonimy(czas)):
