@@ -1,3 +1,5 @@
+from finder import base_form
+
 class Question:
     """Potwierdza presupozycje pytania"""
     def __init__(self, zdanie):
@@ -18,6 +20,8 @@ class Question:
             self.name = self.place[-1]
             self.place = self.place[:-1]
         self.city = " ".join(self.place)
+        self.name = base_form(self.name)
+
 
     def checker(self):
         directory = "./bazy/finbaza.fred1"
@@ -40,13 +44,14 @@ class Question:
                         print(line)
                         self.city = line
         print(self.name, self.city)
+    
 
 
 if __name__ == '__main__':
-    x = Question("Kto zabil Kennediego w Bydgoszczy")
+    x = Question("Kto zabil Kennedy'ego w Bydgoszczy")
     x.find()
     x.checker()
-    y = Question("Kto zabil w Dallas Kennediego")
+    y = Question("Kto zabil w Dallas Kennedy'ego")
     y.find()
     y.checker()
     z = Question("Kto zabil Fliegera w New York")

@@ -23,7 +23,7 @@ def odmiany_synonimow(synlist):
     for elem in synlist:
         with open("./bazy/dane.odmian") as o:
             for linia in o.readlines():
-                if elem in linia.split(', '):
+                if elem in linia:
                     ret.append(linia)
     return ', '.join(ret).replace("\n", "").split(', ')
 
@@ -40,11 +40,20 @@ def znajdz_czas():
                 ret.append((slowo, elem)) 
     return ret
 
+def base_form(name):
+    with open("./bazy/dane.odmian") as o:
+        for line in o:
+            if name in line:
+                return line.split(', ')[0]
+    return name
+
 
 #czas = input("podaj czasownik: ")
-if __name__ == '__main__': 
+if __name__ == '__main__':
+    print(base_form("Kennedy'ego"))
+    print(base_form("Piotrka"))
     #znajdz_czas()
-    print(znajdz_czas())
+    #print(znajdz_czas())
     #czas = 'zabił'
     #with open("./bazy/zabil.all", "w") as o:
     #  for slowo in  odmiany_synonimow(synonimy(czas)):
