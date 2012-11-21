@@ -2,17 +2,10 @@ def podaj_zdania(text):
     text = text.replace("\n", "")
     return text.split(".")
 
-def odmiany(slowo):
-    ret = ''
-    with open("./bazy/dane.odmian") as o:
-        for linia in o.readlines():
-            cos = linia.split(', ')
-            if slowo in cos:
-                return cos[0]
 
 def synonimy(slowo):
     ret = []
-    stemp = odmiany(slowo)
+    stemp = base_form(slowo)
     for linia in open("./bazy/dane.syn").readlines():
         if stemp in linia:
             ret.append(linia)
