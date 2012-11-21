@@ -15,7 +15,7 @@ def odmiany_synonimow(synlist):
     ret = []
     for elem in synlist:
         with open("./bazy/dane.odmian") as o:
-            for linia in o.readlines():
+            for linia in o:
                 if elem in linia:
                     ret.append(linia)
     return ', '.join(ret).replace("\n", "").split(', ')
@@ -40,7 +40,7 @@ def base_form(name):
                 return line.split(', ')[0]
     return name
 
-def potw_predy(name, miejsce):
+def potw_presup(name, miejsce):
     ifname = False
     ifplace = False
     for czas, line in znajdz_czas():
@@ -48,10 +48,10 @@ def potw_predy(name, miejsce):
             ifname = True
         if miejsce in line:
             ifplace = True
-    if ifname and ifplace: return 3
-    elif ifname: return 2
+    if ifname and ifplace: return 3 #presupozycja potwierdzona
+    elif ifname: return 2 
     elif ifplace: return 1
-    else: return 0
+    else: return 0 #tekst nie zawiera dostatecznych informacji
     
 
 #czas = input("podaj czasownik: ")
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     #print(base_form("Kennedy'ego"))
     #print(base_form("Piotrka"))
     #znajdz_czas()
-    print(potw_predy("Kennedy", "Dallas"))
+    print(potw_presup("Kennedy", "Dallas"))
     #print(znajdz_czas())
     #czas = 'zabił'
     #with open("./bazy/zabil.all", "w") as o:
