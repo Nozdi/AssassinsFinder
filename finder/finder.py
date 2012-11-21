@@ -2,13 +2,13 @@ def podaj_zdania(text):
     text = text.replace("\n", "")
     return text.split(".")
 
-
 def synonimy(slowo):
     ret = []
     stemp = base_form(slowo)
-    for linia in open("./bazy/dane.syn").readlines():
-        if stemp in linia:
-            ret.append(linia)
+    with open("./bazy/dane.syn") as o:
+        for linia in o:
+            if stemp in linia:
+                ret.append(linia)
     return ';'.join(ret).replace("\n", "").split(';')
 
 def odmiany_synonimow(synlist):
