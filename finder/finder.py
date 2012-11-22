@@ -74,7 +74,7 @@ def whos_da_killa(killers, texters=[('jakis shit i tak nie znaczenia', lol)]):
     fullname = []
     index_upper = []
     for krotka in texters:
-        zd = [slowo.rstrip(',').rstrip('.') for slowo in krotka[1].split()]
+        zd = [slowo.rstrip(',, czas').rstrip('.') for slowo in krotka[1].split()]
         print(zd)
         i_kill = zd.index(szuk)
         for i in zd:
