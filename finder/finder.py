@@ -77,13 +77,6 @@ def diffrenet_split(text):
             x[nr]='\n'
     return [elem.strip(" ") for elem in " ".join(x).split("\n")]
 
-def fullname(text, killer):
-    for ktorka in text:
-        if killer in krotka[1]:
-            pass
-        
-
-        
     
 
 #czas = input("podaj czasownik: ")
