@@ -20,7 +20,7 @@ def odmiany_synonimow(synlist):
                     ret.append(linia)
     return ', '.join(ret).replace("\n", "").split(', ')
 
-#text = podaj_zdania(open("Kennedy.txt").read())
+text = podaj_zdania(open("Kennedy.txt").read())
 #text = podaj_zdania(open("narutowicz.txt").read())
 #text = podaj_zdania(open("lennon.txt").read())
 
@@ -76,6 +76,10 @@ def diffrenet_split(text):
         if elem == "": 
             x[nr]='\n'
     return [elem.strip(" ") for elem in " ".join(x).split("\n")]
+
+def fullname(text, killer):
+    for ktorka in text:
+        if killer in krotka[1]:
         
 
         
@@ -88,7 +92,8 @@ if __name__ == '__main__':
     #znajdz_czas()
     #print(potw_predy("Kennedy", "Dallas"))
     #print(znajdz_czas())
-    print(whos_da_killa(bloody_shot(znajdz_czas(), odmiany_synonimow(['Kennedy']), odmiany_synonimow(['Dallas']) )))
+    #print(whos_da_killa(bloody_shot(znajdz_czas(), odmiany_synonimow(['Kennedy']), odmiany_synonimow(['Dallas']) )))
+    print(bloody_shot(znajdz_czas(text), odmiany_synonimow(['Kennedy']), odmiany_synonimow(['Dallas'])))
     #czas = 'zabił'
     #with open("./bazy/zabil.all", "w") as o:
     #  for slowo in  odmiany_synonimow(synonimy(czas)):
