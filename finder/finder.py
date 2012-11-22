@@ -80,6 +80,7 @@ def diffrenet_split(text):
 def fullname(text, killer):
     for ktorka in text:
         if killer in krotka[1]:
+            pass
         
 
         

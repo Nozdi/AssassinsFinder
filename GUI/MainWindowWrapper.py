@@ -26,6 +26,7 @@ class MainWindowWrapper(QMainWindow):
         self.thread = SleepProgress()
         self.thread.partDone.connect(self.what)
         self.thread.procDone.connect(self.koniec)
+        self.presup = True
         QObject.connect(self.ui.WybierzButton, SIGNAL('clicked()'), self.wybierz)
         QObject.connect(self.ui.StartButton, SIGNAL('clicked()'), self.start)
     def wybierz(self):
@@ -41,8 +42,7 @@ class MainWindowWrapper(QMainWindow):
         if pytanie and plik:
             self.thread.start()
             tekst = podaj_zdania(open(plik).read())
-            self.ui.progressBar.setValue
-            if potw_presup(que.name, que.city, tekst):
+            if potw_presup(que.name, que.city, tekst)>2:
                 czas = znajdz_czas(tekst)
                 odmiany_nazwisk = odmiany_synonimow([que.name])
                 odmiany_miasta = odmiany_synonimow([que.city])
@@ -50,6 +50,7 @@ class MainWindowWrapper(QMainWindow):
                 self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, whos_da_killa(probably_killa), que.city))
                 self.ui.progressBar.setValue(100)
             else:
+                self.presup = False
                 QMessageBox.critical(self, "Problem", "Presupozycja nie może zostać potwierdzona!!", QMessageBox.Ok)
         else:
             QMessageBox.critical(self, "Error", "Nie napisałeś pytania lub nie wybrałeś pliku!!", QMessageBox.Ok)
@@ -57,7 +58,8 @@ class MainWindowWrapper(QMainWindow):
     def what(self, value):
         self.ui.progressBar.setValue(value)
     def koniec(self):
-        while True:
+        while self.presup:
             if self.ui.OdpowiedzLine.text() != "": break
-        self.ui.progressBar.setValue(100)
+        else: self.ui.progressBar.setValue(0)
+        if self.presup: self.ui.progressBar.setValue(100)
         
