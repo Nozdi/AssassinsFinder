@@ -44,7 +44,7 @@ def base_form(name):
 def potw_presup(name, miejsce, tekst):
     ifname = False
     ifplace = False
-    for czas, line in znajdz_czas(tekst):
+    for czas, line in tekst:
         if name in line:
             ifname = True
         if miejsce in line:

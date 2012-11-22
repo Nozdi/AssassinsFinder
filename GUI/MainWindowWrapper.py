@@ -43,15 +43,15 @@ class MainWindowWrapper(QMainWindow):
             self.thread.start()
             que = Question(pytanie)
             tekst = podaj_zdania(open(plik).read())
-            presup = potw_presup(que.name, que.city, tekst)
-            if presup:
-                czas = znajdz_czas(tekst)
+            czas = znajdz_czas(tekst)
+            presup_nr = potw_presup(que.name, que.city, czas)
+            if presup_nr:
                 odmiany_nazwisk = odmiany_synonimow([que.name])
                 odmiany_miasta = odmiany_synonimow([que.city])
                 probably_killa = bloody_shot(czas, odmiany_nazwisk, odmiany_miasta)
                 killa = whos_da_killa(probably_killa)
-                if presup == 3: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, killa, que.city))
-                elif presup == 2: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w ?%s?" % (que.name, killa, que.city))
+                if presup_nr == 3: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, killa, que.city))
+                elif presup_nr == 2: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w ?%s?" % (que.name, killa, que.city))
                 else: self.ui.OdpowiedzLine.setText("?%s? został zabity przez %s w %s" % (que.name, killa, que.city))
                 self.ui.progressBar.setValue(100)
             else:
