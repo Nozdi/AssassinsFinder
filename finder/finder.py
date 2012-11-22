@@ -20,9 +20,6 @@ def odmiany_synonimow(synlist):
                     ret.append(linia)
     return ', '.join(ret).replace("\n", "").split(', ')
 
-text = podaj_zdania(open("Kennedy.txt").read())
-#text = podaj_zdania(open("narutowicz.txt").read())
-#text = podaj_zdania(open("lennon.txt").read())
 
 def znajdz_czas(text):
     ret = []
@@ -63,28 +60,22 @@ def bloody_shot(zdania, osoba, miejsce):
             if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and 'przez' in elem[1]: killer.append(slowo)
     return killer
 
-lol = 'Niedługo później policja schwytała Lee Harveya Oswalda, byłego żołnierza US Marines, znanego z marksistowskich sympatii.'
-                        #Tego lol to trzeba potem wyperdolić
-
-def whos_da_killa(killers, texters=[('jakis shit i tak nie znaczenia', lol)]):
-    #killer = [base_form(elem) for elem in killers]
+def whos_da_killa(killers, texters):
     import collections
     x = collections.Counter(killers)
     szuk =  x.most_common(1)[0][0]
     fullname = []
     index_upper = []
     for krotka in texters:
-        zd = [slowo.rstrip(',, czas').rstrip('.') for slowo in krotka[1].split()]
-        print(zd)
-        i_kill = zd.index(szuk)
-        for i in zd:
-            if i[0].isupper(): index_upper.append(zd.index(i))
-        #index_upper=index_upper[::-1]
-        import math
-        for i in index_upper:
-            if math.fabs(i-i_kill) <3 : #gimmi just a lil bit love
-                fullname.append(zd[i])
-    
+        zd = [slowo.rstrip(',').rstrip('.') for slowo in krotka[1].split()]
+        if szuk in zd:
+            i_kill = zd.index(szuk)
+            for i in zd:
+                if i[0].isupper(): index_upper.append(zd.index(i))
+            import math
+            for i in index_upper:
+                if math.fabs(i-i_kill) <3 : #gimmi just a lil bit love
+                    if zd[i] not in fullname: fullname.append(zd[i]) 
     return ' '.join([base_form(elem) for elem in fullname])
 
 
@@ -97,7 +88,6 @@ def diffrenet_split(text):
     return [elem.strip(" ") for elem in " ".join(x).split("\n")]
     
 
-#czas = input("podaj czasownik: ")
 if __name__ == '__main__':
     #print(base_form("Kennedy'ego"))
     #print(base_form("Piotrka"))
