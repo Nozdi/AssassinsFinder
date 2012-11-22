@@ -75,16 +75,14 @@ def whos_da_killa(killers, texters=[('jakis shit i tak nie znaczenia', lol)]):
     index_upper = []
     for krotka in texters:
         zd = [slowo.rstrip(',').rstrip('.') for slowo in krotka[1].split()]
-        print(zd)
-        i_kill = zd.index(szuk)
-        for i in zd:
-            if i[0].isupper(): index_upper.append(zd.index(i))
-        #index_upper=index_upper[::-1]
-        import math
-        for i in index_upper:
-            if math.fabs(i-i_kill) <3 : #gimmi just a lil bit love
-                fullname.append(zd[i])
-    
+        if szuk in zd:
+            i_kill = zd.index(szuk)
+            for i in zd:
+                if i[0].isupper(): index_upper.append(zd.index(i))
+            import math
+            for i in index_upper:
+                if math.fabs(i-i_kill) <3 : #gimmi just a lil bit love
+                    if zd[i] not in fullname: fullname.append(zd[i]) 
     return ' '.join([base_form(elem) for elem in fullname])
 
 
