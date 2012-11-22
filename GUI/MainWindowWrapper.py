@@ -12,9 +12,9 @@ class SleepProgress(QThread):
     partDone = pyqtSignal(int)
     
     def run(self):
-        for a in range(1, 7+1):
-            self.partDone.emit(float(a)/7.0*99)
-            time.sleep(0.13)
+        for a in range(1, 40+1):
+            self.partDone.emit(float(a)/40.0*99)
+            time.sleep(0.03)
         self.procDone.emit(True)
 
 
@@ -34,20 +34,25 @@ class MainWindowWrapper(QMainWindow):
         if directory:
             self.ui.SciezkaLine.setText(directory)
     def start(self):
+        self.presup = True
         self.ui.OdpowiedzLine.setText("")
         self.ui.progressBar.setValue(0)
         pytanie = self.ui.pytanieEdit.text()
-        que = Question(pytanie)
         plik = self.ui.SciezkaLine.text()
         if pytanie and plik:
             self.thread.start()
+            que = Question(pytanie)
             tekst = podaj_zdania(open(plik).read())
-            if potw_presup(que.name, que.city, tekst)>2:
+            presup = potw_presup(que.name, que.city, tekst)
+            if presup:
                 czas = znajdz_czas(tekst)
                 odmiany_nazwisk = odmiany_synonimow([que.name])
                 odmiany_miasta = odmiany_synonimow([que.city])
                 probably_killa = bloody_shot(czas, odmiany_nazwisk, odmiany_miasta)
-                self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, whos_da_killa(probably_killa), que.city))
+                killa = whos_da_killa(probably_killa)
+                if presup == 3: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, killa, que.city))
+                elif presup == 2: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w ?%s?" % (que.name, killa, que.city))
+                else: self.ui.OdpowiedzLine.setText("?%s? został zabity przez %s w %s" % (que.name, killa, que.city))
                 self.ui.progressBar.setValue(100)
             else:
                 self.presup = False
