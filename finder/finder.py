@@ -63,11 +63,30 @@ def bloody_shot(zdania, osoba, miejsce):
             if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and 'przez' in elem[1]: killer.append(slowo)
     return killer
 
-def whos_da_killa(killers):
-    killer = [base_form(elem) for elem in killers]
+lol = 'Niedługo później policja schwytała Lee Harveya Oswalda, byłego żołnierza US Marines, znanego z marksistowskich sympatii.'
+l = [slowo.rstrip(',').rstrip('.') for slowo in lol.split()]
+print(l.index('Oswalda'))
+def whos_da_killa(killers, texters=[('jakis shit i tak nie znaczenia', lol)]):
+    #killer = [base_form(elem) for elem in killers]
     import collections
-    x = collections.Counter(killer)
-    return x.most_common(1)[0][0]
+    x = collections.Counter(killers)
+    szuk =  x.most_common(1)[0][0]
+    fullname = []
+    index_upper = []
+    for krotka in texters:
+        zd = [slowo.rstrip(',').rstrip('.') for slowo in krotka[1].split()]
+        print(zd)
+        i_kill = zd.index(szuk)
+        for i in zd:
+            if i[0].isupper(): index_upper.append(zd.index(i))
+        #index_upper=index_upper[::-1]
+        import math
+        for i in index_upper:
+            if math.fabs(i-i_kill) <3 : #gimmi just a lil bit love
+                fullname.append(zd[i])
+    
+    return ' '.join([base_form(elem) for elem in fullname])
+
 
 def diffrenet_split(text):
     import re
@@ -76,7 +95,6 @@ def diffrenet_split(text):
         if elem == "": 
             x[nr]='\n'
     return [elem.strip(" ") for elem in " ".join(x).split("\n")]
-
     
 
 #czas = input("podaj czasownik: ")
