@@ -13,8 +13,13 @@ class Question:
 
     # Jesli UpperCase przed w to jest to imie(nazwisko), inaczej po w ostatni upper to imie(nazwisko)
     def find(self):
-        index = self.zdanie.find("w")
-        city = self.zdanie[index + 1:] #zdanie po 'w' 
+        index = self.zdanie.find(" w ")
+        citytmp = self.zdanie[index+2:] #zdanie po 'w'
+        city = []
+        for elem in citytmp.split():
+            if elem[0].isupper(): # teraz jest tylko po w ale duze litery
+                city.append(elem)
+        city = ' '.join(city)
         self.place = city.split() #mozliwe miasta
         for s in self.zdanie[:index].split(): #czy jest przed w cos z duzej?
             if s[0].isupper() and s != "Kto": 
