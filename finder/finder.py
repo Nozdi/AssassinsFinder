@@ -64,8 +64,8 @@ def bloody_shot(zdania, osoba, miejsce):
     return killer
 
 lol = 'Niedługo później policja schwytała Lee Harveya Oswalda, byłego żołnierza US Marines, znanego z marksistowskich sympatii.'
-l = [slowo.rstrip(',').rstrip('.') for slowo in lol.split()]
-print(l.index('Oswalda'))
+                        #Tego lol to trzeba potem wyperdolić
+
 def whos_da_killa(killers, texters=[('jakis shit i tak nie znaczenia', lol)]):
     #killer = [base_form(elem) for elem in killers]
     import collections
