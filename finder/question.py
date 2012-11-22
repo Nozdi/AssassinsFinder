@@ -52,5 +52,14 @@ class Question:
 
 if __name__ == '__main__':
     x = Question("Kto zabil Kennedy'ego w Bydgoszczy")
+    print(x.name, x.city)
     y = Question("Kto zabil w Dallas Kennedy'ego")
+    print(y.name, y.city)
     z = Question("Kto zabil Flieger w New York")
+    print(z.name, z.city)
+    d = Question("Kto w Dallas zabił Kennedy'ego")
+    print(d.name, d.city)
+    d = Question("Kto zabił Narutowicza w Warszawie")
+    print(d.name, d.city)
+    d = Question("Kto zabił w Warszawie Narutowicza")
+    print(d.name, d.city)

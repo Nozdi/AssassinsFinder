@@ -44,7 +44,7 @@ def base_form(name):
 def potw_presup(name, miejsce, tekst):
     ifname = False
     ifplace = False
-    for czas, line in znajdz_czas(tekst):
+    for czas, line in tekst:
         if name in line:
             ifname = True
         if miejsce in line:
@@ -80,6 +80,7 @@ def diffrenet_split(text):
 def fullname(text, killer):
     for ktorka in text:
         if killer in krotka[1]:
+            pass
         
 
         
