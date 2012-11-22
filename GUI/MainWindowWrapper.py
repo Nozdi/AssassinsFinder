@@ -1,15 +1,31 @@
 from PyQt4 import QtGui
 from PyQt4.QtGui import QMainWindow, QFileDialog, QMessageBox
-from PyQt4.QtCore import QObject, SIGNAL, QDir
+from PyQt4.QtCore import QObject, SIGNAL, QDir, pyqtSignal, QThread
 from .MainWindow import Ui_Assassins
 from finder.question import Question
 from finder.finder import *
+
+import time
+
+class SleepProgress(QThread):
+    procDone = pyqtSignal(bool)
+    partDone = pyqtSignal(int)
+    
+    def run(self):
+        for a in range(1, 7+1):
+            self.partDone.emit(float(a)/7.0*99)
+            time.sleep(0.13)
+        self.procDone.emit(True)
+
 
 class MainWindowWrapper(QMainWindow):
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
         self.ui = Ui_Assassins()
         self.ui.setupUi(self)
+        self.thread = SleepProgress()
+        self.thread.partDone.connect(self.what)
+        self.thread.procDone.connect(self.koniec)
         QObject.connect(self.ui.WybierzButton, SIGNAL('clicked()'), self.wybierz)
         QObject.connect(self.ui.StartButton, SIGNAL('clicked()'), self.start)
     def wybierz(self):
@@ -17,23 +33,20 @@ class MainWindowWrapper(QMainWindow):
         if directory:
             self.ui.SciezkaLine.setText(directory)
     def start(self):
+        self.ui.OdpowiedzLine.setText("")
         self.ui.progressBar.setValue(0)
         pytanie = self.ui.pytanieEdit.text()
         que = Question(pytanie)
         plik = self.ui.SciezkaLine.text()
-        self.ui.progressBar.setValue(10)
         if pytanie and plik:
+            self.thread.start()
             tekst = podaj_zdania(open(plik).read())
-            self.ui.progressBar.setValue(24)
+            self.ui.progressBar.setValue
             if potw_presup(que.name, que.city, tekst):
                 czas = znajdz_czas(tekst)
-                self.ui.progressBar.setValue(34)
                 odmiany_nazwisk = odmiany_synonimow([que.name])
-                self.ui.progressBar.setValue(43)
                 odmiany_miasta = odmiany_synonimow([que.city])
-                self.ui.progressBar.setValue(66)
                 probably_killa = bloody_shot(czas, odmiany_nazwisk, odmiany_miasta)
-                self.ui.progressBar.setValue(99)
                 self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, whos_da_killa(probably_killa), que.city))
                 self.ui.progressBar.setValue(100)
             else:
@@ -41,3 +54,10 @@ class MainWindowWrapper(QMainWindow):
         else:
             QMessageBox.critical(self, "Error", "Nie napisałeś pytania lub nie wybrałeś pliku!!", QMessageBox.Ok)
         #self.ui.OdpowiedzLine.setText("Zginał pan %s w %s"%(que.name, que.city))
+    def what(self, value):
+        self.ui.progressBar.setValue(value)
+    def koniec(self):
+        while True:
+            if self.ui.OdpowiedzLine.text() != "": break
+        self.ui.progressBar.setValue(100)
+        
