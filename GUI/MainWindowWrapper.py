@@ -42,18 +42,20 @@ class MainWindowWrapper(QMainWindow):
         if pytanie and plik:
             self.thread.start()
             que = Question(pytanie)
-            tekst = podaj_zdania(open(plik).read())
-            czas = znajdz_czas(tekst)
-            presup_nr = potw_presup(que.name, que.city, czas)
-            if presup_nr:
-                odmiany_nazwisk = odmiany_synonimow([que.name])
-                odmiany_miasta = odmiany_synonimow([que.city])
-                probably_killa = bloody_shot(czas, odmiany_nazwisk, odmiany_miasta)
-                killa = whos_da_killa(probably_killa, czas)
-                if presup_nr == 3: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, killa, que.city))
-                elif presup_nr == 2: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w ?%s?" % (que.name, killa, que.city))
-                else: self.ui.OdpowiedzLine.setText("?%s? został zabity przez %s w %s" % (que.name, killa, que.city))
-                self.ui.progressBar.setValue(100)
+            textes = open(plik).read().split("\n")
+            for tekst in textes:
+                czas = znajdz_czas(podaj_zdania(tekst))
+                presup_nr = potw_presup(que.name, que.city, czas)
+                if presup_nr>2:
+                    odmiany_nazwisk = odmiany_synonimow([que.name])
+                    odmiany_miasta = odmiany_synonimow([que.city])
+                    probably_killa = bloody_shot(czas, odmiany_nazwisk, odmiany_miasta)
+                    killa = whos_da_killa(probably_killa, czas)
+                    if presup_nr == 3: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, killa, que.city))
+                    elif presup_nr == 2: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w ?%s?" % (que.name, killa, que.city))
+                    break;
+                    #else: self.ui.OdpowiedzLine.setText("?%s? został zabity przez %s w %s" % (que.name, killa, que.city))
+                    self.ui.progressBar.setValue(100)
             else:
                 self.presup = False
                 QMessageBox.critical(self, "Problem", "Presupozycja nie może zostać potwierdzona!!", QMessageBox.Ok)
