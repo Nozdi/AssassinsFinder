@@ -45,14 +45,17 @@ class MainWindowWrapper(QMainWindow):
             textes = open(plik).read().split("\n")
             for tekst in textes:
                 czas = znajdz_czas(podaj_zdania(tekst))
-                presup_nr = potw_presup(que.name, que.city, czas)
+                presup_nr = potw_presup(que.name, que.city, tekst)
                 if presup_nr>2:
                     odmiany_nazwisk = odmiany_synonimow([que.name])
                     odmiany_miasta = odmiany_synonimow([que.city])
                     probably_killa = bloody_shot(czas, odmiany_nazwisk, odmiany_miasta)
-                    killa = whos_da_killa(probably_killa, czas)
+                    try:
+                        killa = whos_da_killa(probably_killa, czas)
+                    except IndexError:
+                        continue
                     if presup_nr == 3: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, killa, que.city))
-                    elif presup_nr == 2: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w ?%s?" % (que.name, killa, que.city))
+                    elif presup_nr == 2: self.ui.OdpowiedzLine.setText("%s został zabity przez %s ale %s nie jest pewne" % (que.name, killa, que.city))
                     break;
                     #else: self.ui.OdpowiedzLine.setText("?%s? został zabity przez %s w %s" % (que.name, killa, que.city))
                     self.ui.progressBar.setValue(100)

@@ -41,10 +41,10 @@ def base_form(name):
 def potw_presup(name, miejsce, tekst):
     ifname = False
     ifplace = False
-    for czas, line in tekst:
+    for line in tekst.split('.'):
         if name in line:
             ifname = True
-        if miejsce in line:
+        if miejsce[:-2] in line:
             ifplace = True
     if ifname and ifplace: return 3 #presupozycja potwierdzona
     elif ifname: return 2 
@@ -57,7 +57,8 @@ def bloody_shot(zdania, osoba, miejsce):
         tmp = elem[1][elem[1].find(elem[0])+len(elem[0])+1:]
         for slowo in tmp.split():
             slowo = slowo.rstrip(',"')
-            if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and 'przez' in elem[1]: killer.append(slowo)
+            if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and 'przez' in elem[1] and base_form(slowo) not in open("./bazy/dane.miast").read().split("\n"): 
+                killer.append(slowo)
     return killer
 
 def whos_da_killa(killers, texters):
