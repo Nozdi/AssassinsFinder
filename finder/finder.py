@@ -70,21 +70,24 @@ def bloody_shot(zdania, osoba, miejsce):
 def whos_da_killa(killers, texters, osoba, miejsce):
     import collections
     x = collections.Counter(killers)
-    szuk =  x.most_common(1)[0][0]
+    biggest = x.most_common()[0][1]
+    szuk =  [os for os, liczba in x.most_common() if liczba == biggest]
     fullname = []
     index_upper = []
     for krotka in texters:
         zd = [slowo.rstrip(',.') for slowo in krotka[1].split()]
-        if szuk in zd:
-            i_kill = zd.index(szuk)
-            for i in zd:
-                if i[0].isupper(): index_upper.append(zd.index(i))
-            for i in index_upper:
-                if abs(i-i_kill) <3 : #gimmi just a lil bit love
-                    if zd[i] not in osoba:
-                        if zd[i] not in fullname and zd[i] not in miejsce: fullname.append(zd[i])
-                    else: fullname=[];break
+        for os in szuk:
+            if os in zd:
+                i_kill = zd.index(os)
+                for i in zd:
+                    if i[0].isupper(): index_upper.append(zd.index(i))
+                for i in index_upper:
+                    if abs(i-i_kill) <3 : #gimmi just a lil bit love
+                        if zd[i] in fullname: continue
+                        elif zd[i] not in osoba and zd[i] not in miejsce: fullname.append(zd[i])
+                        else: fullname=[];break
+            if fullname: break
     ret = ' '.join([base_form(elem) for elem in fullname])
-    print('Nazwisko zabójcy', ret, file=open('temp','a'))
+    if ret: print('Nazwisko zabójcy', ret, file=open('temp','a'))
     return ret
 
