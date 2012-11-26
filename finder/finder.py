@@ -60,7 +60,7 @@ def bloody_shot(zdania, osoba, miejsce):
             tmp = elem[1]
         for slowo in elem[1].split():
             slowo = slowo.rstrip(',"')
-            if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and base_form(slowo) not in open("./bazy/dane.miast").read().split("\n"): 
+            if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and base_form(slowo) not in open("./bazy/dane.miast").read().split("\n"):
                 killer.append(slowo)
     return killer
 
