@@ -88,19 +88,3 @@ def whos_da_killa(killers, texters, osoba, miejsce):
     print('Nazwisko zabójcy', ret, file=open('temp','a'))
     return ret
 
-
-if __name__ == '__main__':
-    #print(base_form("Kennedy'ego"))
-    #print(base_form("Piotrka"))
-    #znajdz_czas()
-    #print(potw_predy("Kennedy", "Dallas"))
-    #print(znajdz_czas())
-    #print(whos_da_killa(bloody_shot(znajdz_czas(), odmiany_synonimow(['Kennedy']), odmiany_synonimow(['Dallas']) )))
-    print(bloody_shot(znajdz_czas(text), odmiany_synonimow(['Kennedy']), odmiany_synonimow(['Dallas'])))
-    #czas = 'zabił'
-    #with open("./bazy/zabil.all", "w") as o:
-    #  for slowo in  odmiany_synonimow(synonimy(czas)):
-    #       print(slowo, file=o)
-#print(znajdz_czas(czas))
-#print(podaj_zadania("Avdads.\nasdas asdkjsa.\n asdjkasdk.\n"))
-#x = podaj_zadania(open("Kennedy.txt").read())
