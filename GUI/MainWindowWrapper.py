@@ -52,6 +52,7 @@ class MainWindowWrapper(QMainWindow):
                     probably_killa = bloody_shot(czas, odmiany_nazwisk, odmiany_miasta)
                     try:
                         killa = whos_da_killa(probably_killa, czas, odmiany_nazwisk, odmiany_miasta)
+                        if not killa: continue
                     except IndexError:
                         continue
                     if presup_nr == 3: self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, killa, que.city))

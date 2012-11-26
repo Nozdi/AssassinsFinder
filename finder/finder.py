@@ -80,7 +80,6 @@ def whos_da_killa(killers, texters, osoba, miejsce):
             for i in index_upper:
                 if abs(i-i_kill) <3 : #gimmi just a lil bit love
                     if zd[i] not in osoba:
-                        print(osoba, "TO:", zd[i])
                         if zd[i] not in fullname and zd[i] not in miejsce: fullname.append(zd[i])
                     else: fullname=[];break
     return ' '.join([base_form(elem) for elem in fullname])
