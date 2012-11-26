@@ -54,10 +54,13 @@ def potw_presup(name, miejsce, tekst):
 def bloody_shot(zdania, osoba, miejsce):
     killer = []
     for elem in zdania:
-        tmp = elem[1][elem[1].find(elem[0])+len(elem[0])+1:]
-        for slowo in tmp.split():
+        if 'przez' in elem[1]:
+            tmp = elem[1][elem[1].find(elem[0])+len(elem[0])+1:]
+        elif 'postrzelił' in elem[1] and 'śmiertelnie' in elem[1]:
+            tmp = elem[1]
+        for slowo in elem[1].split():
             slowo = slowo.rstrip(',"')
-            if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and 'przez' in elem[1] and base_form(slowo) not in open("./bazy/dane.miast").read().split("\n"): 
+            if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and base_form(slowo) not in open("./bazy/dane.miast").read().split("\n"): 
                 killer.append(slowo)
     return killer
 
@@ -68,7 +71,7 @@ def whos_da_killa(killers, texters):
     fullname = []
     index_upper = []
     for krotka in texters:
-        zd = [slowo.rstrip(',').rstrip('.') for slowo in krotka[1].split()]
+        zd = [slowo.rstrip(',.') for slowo in krotka[1].split()]
         if szuk in zd:
             i_kill = zd.index(szuk)
             for i in zd:

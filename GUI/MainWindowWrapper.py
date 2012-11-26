@@ -14,7 +14,7 @@ class SleepProgress(QThread):
     def run(self):
         for a in range(1, 40+1):
             self.partDone.emit(float(a)/40.0*99)
-            time.sleep(0.03)
+            time.sleep(0.06)
         self.procDone.emit(True)
 
 
