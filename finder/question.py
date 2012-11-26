@@ -32,38 +32,3 @@ class Question:
         self.city = " ".join(self.place)
         self.name = base_form(self.name)
 
-
-    def checker(self):
-        #directory = "./bazy/finbaza.fred1"
-        #found = False
-        #for line in open(directory):
-        #    if not found and line.startswith(self.city):
-        #        found = True
-        #        self.city = line
-        #if not found:
-        #    for line in open(directory):
-        #        if not found and line.startswith(self.city[:-1]):
-        #            found = True
-        #            self.city = line
-        #    if not found:
-        #        for line in open(directory):
-        #            if not found and line.startswith(self.city[:-2]):
-        #                found = True
-        #                self.city = line
-        #if not found:
-        self.city = base_form(self.city)
-    
-
-if __name__ == '__main__':
-    x = Question("Kto zabil Kennedy'ego w Bydgoszczy")
-    print(x.name, x.city)
-    y = Question("Kto zabil w Dallas Kennedy'ego")
-    print(y.name, y.city)
-    z = Question("Kto zabil Flieger w New York")
-    print(z.name, z.city)
-    d = Question("Kto w Dallas zabił Kennedy'ego")
-    print(d.name, d.city)
-    d = Question("Kto zabił Narutowicza w Warszawie")
-    print(d.name, d.city)
-    d = Question("Kto zabił w Warszawie Narutowicza")
-    print(d.name, d.city)
