@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Tue Nov 20 12:36:16 2012
+# Created: Mon Nov 26 17:25:54 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,9 +17,9 @@ except AttributeError:
 class Ui_Assassins(object):
     def setupUi(self, Assassins):
         Assassins.setObjectName(_fromUtf8("Assassins"))
-        Assassins.resize(595, 206)
-        Assassins.setMinimumSize(QtCore.QSize(595, 206))
-        Assassins.setMaximumSize(QtCore.QSize(595, 206))
+        Assassins.resize(595, 410)
+        Assassins.setMinimumSize(QtCore.QSize(595, 410))
+        Assassins.setMaximumSize(QtCore.QSize(595, 410))
         self.centralwidget = QtGui.QWidget(Assassins)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.layoutWidget = QtGui.QWidget(self.centralwidget)
@@ -78,6 +78,18 @@ class Ui_Assassins(object):
         self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         self.horizontalLayout_6.addWidget(self.progressBar)
+        self.layoutWidget4 = QtGui.QWidget(self.centralwidget)
+        self.layoutWidget4.setGeometry(QtCore.QRect(40, 180, 501, 201))
+        self.layoutWidget4.setObjectName(_fromUtf8("layoutWidget4"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.layoutWidget4)
+        self.verticalLayout.setMargin(0)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.label_4 = QtGui.QLabel(self.layoutWidget4)
+        self.label_4.setObjectName(_fromUtf8("label_4"))
+        self.verticalLayout.addWidget(self.label_4)
+        self.WnioskowanietextBrowser = QtGui.QTextBrowser(self.layoutWidget4)
+        self.WnioskowanietextBrowser.setObjectName(_fromUtf8("WnioskowanietextBrowser"))
+        self.verticalLayout.addWidget(self.WnioskowanietextBrowser)
         Assassins.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(Assassins)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -93,4 +105,5 @@ class Ui_Assassins(object):
         self.label_3.setText(QtGui.QApplication.translate("Assassins", "Odpowiedz:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Assassins", "Pytanie:", None, QtGui.QApplication.UnicodeUTF8))
         self.StartButton.setText(QtGui.QApplication.translate("Assassins", "Start", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("Assassins", "Wnioskowanie:", None, QtGui.QApplication.UnicodeUTF8))
 
