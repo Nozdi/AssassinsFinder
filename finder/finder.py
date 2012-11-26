@@ -29,7 +29,7 @@ def znajdz_czas(text):
         for slowo in zabic:
             if slowo in elem:
                 ret.append((slowo, elem))
-    print("<br>Zdania, w których może być odpowiedź:<br>"+"*"*58+"<br>",[elem[1] for elem in ret], file=open('temp','a'))
+    print("<br>Zdania, w których może być odpowiedź:<br><br>",[elem[1] for elem in ret],"<br>" + "*"*58 + "<br>" ,file=open('temp','a'))
     return ret
 
 def base_form(name):
@@ -47,7 +47,7 @@ def potw_presup(name, miejsce, tekst):
             ifname = True
         if miejsce[:-2] in line:
             ifplace = True
-    if ifname and ifplace: print('Nazwisko %s oraz miejsce %s' % (name, miejsce), file=open('temp','a'));return 3 #presupozycja potwierdzona
+    if ifname and ifplace: print('Nazwisko %s oraz miejsce %s. <b>Presupozycja potwierdzona.</b>' % (name, miejsce), file=open('temp','a'));return 3 #presupozycja potwierdzona
     elif ifname: print('Nazwisko %s <b>potwierdzone</b>' % name, file=open('temp','a'));return 2 
     elif ifplace: print('Miejsce %s <b>potwierdzone</b>' % miejsce, file=open('temp','a'));return 1
     else: print('Presupozycja <b>nie potwierdzona</b>', file=open('temp','a'));return 0#tekst nie zawiera dostatecznych informacji

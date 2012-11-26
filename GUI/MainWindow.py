@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Mon Nov 26 17:25:54 2012
+# Created: Mon Nov 26 18:09:43 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,9 +17,9 @@ except AttributeError:
 class Ui_Assassins(object):
     def setupUi(self, Assassins):
         Assassins.setObjectName(_fromUtf8("Assassins"))
-        Assassins.resize(595, 410)
-        Assassins.setMinimumSize(QtCore.QSize(595, 410))
-        Assassins.setMaximumSize(QtCore.QSize(595, 410))
+        Assassins.resize(595, 544)
+        Assassins.setMinimumSize(QtCore.QSize(595, 544))
+        Assassins.setMaximumSize(QtCore.QSize(595, 544))
         self.centralwidget = QtGui.QWidget(Assassins)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.layoutWidget = QtGui.QWidget(self.centralwidget)
@@ -79,7 +79,7 @@ class Ui_Assassins(object):
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         self.horizontalLayout_6.addWidget(self.progressBar)
         self.layoutWidget4 = QtGui.QWidget(self.centralwidget)
-        self.layoutWidget4.setGeometry(QtCore.QRect(40, 180, 501, 201))
+        self.layoutWidget4.setGeometry(QtCore.QRect(40, 180, 501, 321))
         self.layoutWidget4.setObjectName(_fromUtf8("layoutWidget4"))
         self.verticalLayout = QtGui.QVBoxLayout(self.layoutWidget4)
         self.verticalLayout.setMargin(0)
