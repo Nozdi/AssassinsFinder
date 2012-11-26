@@ -28,7 +28,8 @@ def znajdz_czas(text):
     for elem in text:
         for slowo in zabic:
             if slowo in elem:
-                ret.append((slowo, elem)) 
+                ret.append((slowo, elem))
+    print("\nZdania, w których może być odpowiedź:\n",[elem[1] for elem in ret], file=open('temp','a'))
     return ret
 
 def base_form(name):
@@ -46,10 +47,10 @@ def potw_presup(name, miejsce, tekst):
             ifname = True
         if miejsce[:-2] in line:
             ifplace = True
-    if ifname and ifplace: return 3 #presupozycja potwierdzona
-    elif ifname: return 2 
-    elif ifplace: return 1
-    else: return 0 #tekst nie zawiera dostatecznych informacji
+    if ifname and ifplace: print('Nazwisko %s oraz miejsce %s' % (name, miejsce), file=open('temp','a'));return 3 #presupozycja potwierdzona
+    elif ifname: print('Nazwisko %s potwierdzone' % name, file=open('temp','a'));return 2 
+    elif ifplace: print('Miejsce %s potwierdzone' % miejsce, file=open('temp','a'));return 1
+    else: print('Presupozycja nie potwierdzona', file=open('temp','a'));return 0#tekst nie zawiera dostatecznych informacji
     
 def bloody_shot(zdania, osoba, miejsce):
     killer = []
@@ -82,8 +83,9 @@ def whos_da_killa(killers, texters, osoba, miejsce):
                     if zd[i] not in osoba:
                         if zd[i] not in fullname and zd[i] not in miejsce: fullname.append(zd[i])
                     else: fullname=[];break
-    return ' '.join([base_form(elem) for elem in fullname])
-
+    ret = ' '.join([base_form(elem) for elem in fullname])
+    print('Nazwisko zabójcy', ret, file=open('temp','a'))
+    return ret
 
 
 if __name__ == '__main__':
