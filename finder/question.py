@@ -9,7 +9,7 @@ class Question:
         self.city = ''
         if zdanie:
             self.find()
-            self.checker()
+            self.city = base_form(self.city)
 
     # Jesli UpperCase przed w to jest to imie(nazwisko), inaczej po w ostatni upper to imie(nazwisko)
     def find(self):
@@ -34,24 +34,24 @@ class Question:
 
 
     def checker(self):
-        directory = "./bazy/finbaza.fred1"
-        found = False
-        for line in open(directory):
-            if not found and line.startswith(self.city):
-                found = True
-                self.city = line
-        if not found:
-            for line in open(directory):
-                if not found and line.startswith(self.city[:-1]):
-                    found = True
-                    self.city = line
-            if not found:
-                for line in open(directory):
-                    if not found and line.startswith(self.city[:-2]):
-                        found = True
-                        self.city = line
-        if not found:
-            self.city = base_form(self.city)
+        #directory = "./bazy/finbaza.fred1"
+        #found = False
+        #for line in open(directory):
+        #    if not found and line.startswith(self.city):
+        #        found = True
+        #        self.city = line
+        #if not found:
+        #    for line in open(directory):
+        #        if not found and line.startswith(self.city[:-1]):
+        #            found = True
+        #            self.city = line
+        #    if not found:
+        #        for line in open(directory):
+        #            if not found and line.startswith(self.city[:-2]):
+        #                found = True
+        #                self.city = line
+        #if not found:
+        self.city = base_form(self.city)
     
 
 if __name__ == '__main__':
