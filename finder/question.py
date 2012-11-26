@@ -48,6 +48,8 @@ class Question:
                     if not found and line.startswith(self.city[:-2]):
                         found = True
                         self.city = line
+        if not found:
+            self.city = base_form(self.city)
     
 
 if __name__ == '__main__':

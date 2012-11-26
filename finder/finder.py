@@ -54,11 +54,12 @@ def potw_presup(name, miejsce, tekst):
 def bloody_shot(zdania, osoba, miejsce):
     killer = []
     for elem in zdania:
-        if 'przez' in elem[1]:
+        if 'postrzelił' in elem[1] and 'śmiertelnie' in elem[1]:
+            tmp = elem[1]          
+        elif 'przez' in elem[1]:
             tmp = elem[1][elem[1].find(elem[0])+len(elem[0])+1:]
-        elif 'postrzelił' in elem[1] and 'śmiertelnie' in elem[1]:
-            tmp = elem[1]
-        for slowo in elem[1].split():
+        else: continue
+        for slowo in tmp.split():
             slowo = slowo.rstrip(',"')
             if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and base_form(slowo) not in open("./bazy/dane.miast").read().split("\n"):
                 killer.append(slowo)
@@ -76,21 +77,14 @@ def whos_da_killa(killers, texters, osoba, miejsce):
             i_kill = zd.index(szuk)
             for i in zd:
                 if i[0].isupper(): index_upper.append(zd.index(i))
-            import math
             for i in index_upper:
-                if math.fabs(i-i_kill) <3 : #gimmi just a lil bit love
-                    if zd[i] not in fullname and zd[i] not in osoba and zd[i] not in miejsce: fullname.append(zd[i]) 
+                if abs(i-i_kill) <3 : #gimmi just a lil bit love
+                    if zd[i] not in osoba:
+                        if zd[i] not in fullname and zd[i] not in miejsce: fullname.append(zd[i])
+                    else: break
     return ' '.join([base_form(elem) for elem in fullname])
 
 
-def diffrenet_split(text):
-    import re
-    x = re.split("\s[a-z]*", text)
-    for nr, elem in enumerate(x):
-        if elem == "": 
-            x[nr]='\n'
-    return [elem.strip(" ") for elem in " ".join(x).split("\n")]
-    
 
 if __name__ == '__main__':
     #print(base_form("Kennedy'ego"))
