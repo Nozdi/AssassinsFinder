@@ -64,7 +64,7 @@ def bloody_shot(zdania, osoba, miejsce):
                 killer.append(slowo)
     return killer
 
-def whos_da_killa(killers, texters):
+def whos_da_killa(killers, texters, osoba, miejsce):
     import collections
     x = collections.Counter(killers)
     szuk =  x.most_common(1)[0][0]
@@ -79,7 +79,7 @@ def whos_da_killa(killers, texters):
             import math
             for i in index_upper:
                 if math.fabs(i-i_kill) <3 : #gimmi just a lil bit love
-                    if zd[i] not in fullname: fullname.append(zd[i]) 
+                    if zd[i] not in fullname and zd[i] not in osoba and zd[i] not in miejsce: fullname.append(zd[i]) 
     return ' '.join([base_form(elem) for elem in fullname])
 
 
