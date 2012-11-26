@@ -48,9 +48,9 @@ def potw_presup(name, miejsce, tekst):
         if miejsce[:-2] in line:
             ifplace = True
     if ifname and ifplace: print('Nazwisko %s oraz miejsce %s' % (name, miejsce), file=open('temp','a'));return 3 #presupozycja potwierdzona
-    elif ifname: print('Nazwisko %s potwierdzone' % name, file=open('temp','a'));return 2 
-    elif ifplace: print('Miejsce %s potwierdzone' % miejsce, file=open('temp','a'));return 1
-    else: print('Presupozycja nie potwierdzona', file=open('temp','a'));return 0#tekst nie zawiera dostatecznych informacji
+    elif ifname: print('Nazwisko %s <b>potwierdzone</b>' % name, file=open('temp','a'));return 2 
+    elif ifplace: print('Miejsce %s <b>potwierdzone</b>' % miejsce, file=open('temp','a'));return 1
+    else: print('Presupozycja <b>nie potwierdzona</b>', file=open('temp','a'));return 0#tekst nie zawiera dostatecznych informacji
     
 def bloody_shot(zdania, osoba, miejsce):
     killer = []
