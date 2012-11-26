@@ -29,7 +29,7 @@ def znajdz_czas(text):
         for slowo in zabic:
             if slowo in elem:
                 ret.append((slowo, elem))
-    print("\nZdania, w których może być odpowiedź:\n",[elem[1] for elem in ret], file=open('temp','a'))
+    print("\nZdania, w których może być odpowiedź:\n"+"*"*58+"\n",[elem[1] for elem in ret], file=open('temp','a'))
     return ret
 
 def base_form(name):
