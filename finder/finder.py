@@ -30,8 +30,21 @@ def znajdz_czas(text):
             if slowo in elem:
                 ret.append((slowo, elem))
                 break
-    print("<br>Zdania, w których może być odpowiedź:<br><br>",[elem[1] for elem in ret],"<br>" + "*"*58 + "<br>" ,file=open('temp','a'))
+    print("<br>Zdania, w których może być odpowiedź:<br><br>", bolder(ret),"<br>" + "*"*58 + "<br>" ,file=open('temp','a'))
     return ret
+
+def bolder(krotka):
+    ret = []
+    for elem in krotka:
+        p = []
+        index = elem[1].find(elem[0])
+        p+=elem[1][:index]
+        p+='<b>'+elem[0]+'</b>'
+        p+=elem[1][index+len(elem[0]):]
+        ret.append(''.join(p))
+    return ret
+        
+
 
 def base_form(name):
     with open("./bazy/dane.odmian") as o:
