@@ -30,8 +30,21 @@ def znajdz_czas(text):
             if slowo in elem:
                 ret.append((slowo, elem))
                 break
-    print("<br>Zdania, w których może być odpowiedź:<br><br>",[elem[1] for elem in ret],"<br>" + "*"*58 + "<br>" ,file=open('temp','a'))
+    print("<br>Zdania, w których może być odpowiedź:<br><br>", bolder(ret),"<br>" + "*"*58 + "<br>" ,file=open('temp','a'))
     return ret
+
+def bolder(krotka):
+    ret = []
+    for elem in krotka:
+        p = []
+        index = elem[1].find(elem[0])
+        p+=elem[1][:index]
+        p+='<b>'+elem[0]+'</b>'
+        p+=elem[1][index+len(elem[0]):]
+        ret.append(''.join(p))
+    return ret
+        
+
 
 def base_form(name):
     with open("./bazy/dane.odmian") as o:
@@ -48,7 +61,7 @@ def potw_presup(name, miejsce, tekst):
             ifname = True
         if miejsce[:-2] in line:
             ifplace = True
-    if ifname and ifplace: print('Nazwisko %s oraz miejsce %s <b>Presupozycja potwierdzona.</b>' % (name, miejsce), file=open('temp','a'));return 3 #presupozycja potwierdzona
+    if ifname and ifplace: print('<font color="red"><b>Presupozycja potwierdzona:</b></font><br>Nazwisko %s oraz miejsce %s się zgadzają.' % (name, miejsce), file=open('temp','a'));return 3 #presupozycja potwierdzona
     elif ifname: print('Nazwisko %s <b>potwierdzone</b>' % name, file=open('temp','a'));return 2 
     elif ifplace: print('Miejsce %s <b>potwierdzone</b>' % miejsce, file=open('temp','a'));return 1
     else: print('Presupozycja <b>nie potwierdzona</b>', file=open('temp','a'));return 0#tekst nie zawiera dostatecznych informacji
@@ -88,6 +101,6 @@ def whos_da_killa(killers, texters, osoba, miejsce):
                         else: fullname=[];break
             if fullname: break
     ret = ' '.join([base_form(elem) for elem in fullname])
-    if ret: print('Nazwisko zabójcy', ret, file=open('temp','a'))
+    if ret: print('Nazwisko zabójcy', '<font color="red">'+ret+'</font>', file=open('temp','a'))
     return ret
 
