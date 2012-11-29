@@ -63,9 +63,9 @@ def potw_presup(name, miejsce, tekst):
         for gdzie in miejsce:    
             if gdzie in line:
                 ifplace = True
-    if ifname and ifplace: print('<font color="red"><b>Presupozycja potwierdzona:</b></font><br>Nazwisko %s oraz miejsce %s się zgadzają.' % (name, miejsce), file=open('temp','a'));return 3 #presupozycja potwierdzona
+    if ifname and ifplace: print('<font color="red"><b>Presupozycja potwierdzona:</b></font><br>Nazwisko %s oraz miejsce %s się zgadzają.' % (name, miejsce[0]), file=open('temp','a'));return 3 #presupozycja potwierdzona
     elif ifname: print('Nazwisko %s <b>potwierdzone</b>' % name, file=open('temp','a'));return 2 
-    elif ifplace: print('Miejsce %s <b>potwierdzone</b>' % miejsce, file=open('temp','a'));return 1
+    elif ifplace: print('Miejsce %s <b>potwierdzone</b>' % miejsce[0], file=open('temp','a'));return 1
     else: print('Presupozycja <b>nie potwierdzona</b>', file=open('temp','a'));return 0#tekst nie zawiera dostatecznych informacji
     
 def bloody_shot(zdania, osoba, miejsce):
