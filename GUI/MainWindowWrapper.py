@@ -45,12 +45,12 @@ class MainWindowWrapper(QMainWindow):
             self.thread.start()
             que = Question(pytanie)
             textes = open(plik).read().split("\n")
+            odmiany_miasta = odmiany_synonimow([que.city])
+            odmiany_nazwisk = odmiany_synonimow([que.name])
             for tekst in textes:
-                odmiany_miasta = odmiany_synonimow([que.city])
                 presup_nr = potw_presup(que.name, odmiany_miasta, tekst)
                 czas = znajdz_czas(podaj_zdania(tekst))
                 if presup_nr > 2:
-                    odmiany_nazwisk = odmiany_synonimow([que.name])
                     probably_killa = bloody_shot(czas, odmiany_nazwisk, odmiany_miasta)
                     try:
                         killa = whos_da_killa(probably_killa, czas, odmiany_nazwisk, odmiany_miasta)
