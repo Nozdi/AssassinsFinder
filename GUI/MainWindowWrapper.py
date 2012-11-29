@@ -46,11 +46,11 @@ class MainWindowWrapper(QMainWindow):
             que = Question(pytanie)
             textes = open(plik).read().split("\n")
             for tekst in textes:
-                presup_nr = potw_presup(que.name, que.city, tekst)
+                odmiany_miasta = odmiany_synonimow([que.city])
+                presup_nr = potw_presup(que.name, odmiany_miasta, tekst)
                 czas = znajdz_czas(podaj_zdania(tekst))
                 if presup_nr > 2:
                     odmiany_nazwisk = odmiany_synonimow([que.name])
-                    odmiany_miasta = odmiany_synonimow([que.city])
                     probably_killa = bloody_shot(czas, odmiany_nazwisk, odmiany_miasta)
                     try:
                         killa = whos_da_killa(probably_killa, czas, odmiany_nazwisk, odmiany_miasta)
@@ -61,7 +61,7 @@ class MainWindowWrapper(QMainWindow):
                     break
             else:
                 self.presup = False
-                QMessageBox.critical(self, "Problem", "Presupozycja nie może zostać potwierdzona!!", QMessageBox.Ok)
+                QMessageBox.critical(self, "Problem", "Nie da się odpowiedzieć na to pytanie!!", QMessageBox.Ok)
             self.ui.WnioskowanietextBrowser.setText(open("temp").read().replace("\\", ''))
         else:
             QMessageBox.critical(self, "Error", "Nie napisałeś pytania lub nie wybrałeś pliku!!", QMessageBox.Ok)

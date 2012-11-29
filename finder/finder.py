@@ -18,8 +18,8 @@ def odmiany_synonimow(synlist):
             for linia in o:
                 if elem in linia:
                     ret.append(linia)
-    return ', '.join(ret).replace("\n", "").split(', ')
-
+    if ret: return ', '.join(ret).replace("\n", "").split(', ')
+    else: return synlist
 
 def znajdz_czas(text):
     ret = []
@@ -56,11 +56,13 @@ def base_form(name):
 def potw_presup(name, miejsce, tekst):
     ifname = False
     ifplace = False
+    #odmiany_miejsca = odmiany_synonimow([miejsce])
     for line in tekst.split('.'):
         if name in line:
             ifname = True
-        if miejsce[:-2] in line:
-            ifplace = True
+        for gdzie in miejsce:    
+            if gdzie in line:
+                ifplace = True
     if ifname and ifplace: print('<font color="red"><b>Presupozycja potwierdzona:</b></font><br>Nazwisko %s oraz miejsce %s się zgadzają.' % (name, miejsce), file=open('temp','a'));return 3 #presupozycja potwierdzona
     elif ifname: print('Nazwisko %s <b>potwierdzone</b>' % name, file=open('temp','a'));return 2 
     elif ifplace: print('Miejsce %s <b>potwierdzone</b>' % miejsce, file=open('temp','a'));return 1

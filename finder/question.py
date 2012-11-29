@@ -1,4 +1,5 @@
 from .finder import base_form
+from .finder import odmiany_synonimow
 
 class Question:
     """Potwierdza presupozycje pytania"""
