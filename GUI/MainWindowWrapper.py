@@ -44,7 +44,9 @@ class MainWindowWrapper(QMainWindow):
         if pytanie and plik:
             self.thread.start()
             que = Question(pytanie)
-            textes = open(plik).read().split("\n")
+            with open(plik) as p:
+                textes = p.read().split("\n")
+            #textes = open(plik).read().split("\n")
             odmiany_miasta = odmiany_synonimow([que.city])
             odmiany_nazwisk = odmiany_synonimow([que.name])
             for tekst in textes:
@@ -61,7 +63,7 @@ class MainWindowWrapper(QMainWindow):
                     break
             else:
                 self.presup = False
-                QMessageBox.critical(self, "Problem", "Nie da się odpowiedzieć na to pytanie!!", QMessageBox.Ok)
+                QMessageBox.critical(self, "Problem", "Nie można na podstawie podanych tekstów odpowiedzieć na to pytanie!!", QMessageBox.Ok)
             self.ui.WnioskowanietextBrowser.setText(open("temp").read().replace("\\", ''))
         else:
             QMessageBox.critical(self, "Error", "Nie napisałeś pytania lub nie wybrałeś pliku!!", QMessageBox.Ok)
