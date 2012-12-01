@@ -59,7 +59,8 @@ class MainWindowWrapper(QMainWindow):
                         if not killa: continue
                     except IndexError:
                         continue
-                    self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, killa, que.city))
+                    if que.name[-1]!='a': self.ui.OdpowiedzLine.setText("%s został zabity przez %s w %s" % (que.name, killa, que.city))
+                    else: self.ui.OdpowiedzLine.setText("%s została zabita przez %s w %s" % (que.name, killa, que.city))
                     break
             else:
                 self.presup = False
