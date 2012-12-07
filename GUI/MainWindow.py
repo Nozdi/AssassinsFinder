@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Mon Nov 26 18:09:43 2012
+# Created: Fri Dec  7 12:30:50 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -102,8 +102,10 @@ class Ui_Assassins(object):
         Assassins.setWindowTitle(QtGui.QApplication.translate("Assassins", "Assassins Finder", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Assassins", "Ścieżka do teksu:", None, QtGui.QApplication.UnicodeUTF8))
         self.WybierzButton.setText(QtGui.QApplication.translate("Assassins", "Wybierz....", None, QtGui.QApplication.UnicodeUTF8))
+        self.WybierzButton.setShortcut(QtGui.QApplication.translate("Assassins", "Ctrl+O", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("Assassins", "Odpowiedz:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Assassins", "Pytanie:", None, QtGui.QApplication.UnicodeUTF8))
         self.StartButton.setText(QtGui.QApplication.translate("Assassins", "Start", None, QtGui.QApplication.UnicodeUTF8))
+        self.StartButton.setShortcut(QtGui.QApplication.translate("Assassins", "Return", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("Assassins", "Wnioskowanie:", None, QtGui.QApplication.UnicodeUTF8))
 

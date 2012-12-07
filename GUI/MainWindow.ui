@@ -58,6 +58,9 @@
        <property name="text">
         <string>Wybierz....</string>
        </property>
+       <property name="shortcut">
+        <string>Ctrl+O</string>
+       </property>
       </widget>
      </item>
     </layout>
@@ -127,6 +130,9 @@
       <widget class="QPushButton" name="StartButton">
        <property name="text">
         <string>Start</string>
+       </property>
+       <property name="shortcut">
+        <string>Return</string>
        </property>
       </widget>
      </item>

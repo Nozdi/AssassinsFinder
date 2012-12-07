@@ -1,6 +1,6 @@
 from PyQt4 import QtGui
 from PyQt4.QtGui import QMainWindow, QFileDialog, QMessageBox
-from PyQt4.QtCore import QObject, SIGNAL, QDir, pyqtSignal, QThread
+from PyQt4.QtCore import QObject, SIGNAL, QDir, pyqtSignal, QThread, Qt
 from .MainWindow import Ui_Assassins
 from finder.question import Question
 from finder.finder import *
@@ -23,10 +23,18 @@ class MainWindowWrapper(QMainWindow):
         QtGui.QWidget.__init__(self, parent)
         self.ui = Ui_Assassins()
         self.ui.setupUi(self)
+        #Progress bar
         self.thread = SleepProgress()
         self.thread.partDone.connect(self.what)
         self.thread.procDone.connect(self.koniec)
-        self.presup = True
+        #On startup
+        self.ui.pytanieEdit.setFocus()
+        #Fast quit
+        exitAction = QtGui.QAction(self)
+        exitAction.setShortcut('Ctrl+Q')
+        exitAction.triggered.connect(QtGui.qApp.quit)
+        self.addAction(exitAction)
+        #Button connecion
         QObject.connect(self.ui.WybierzButton, SIGNAL('clicked()'), self.wybierz)
         QObject.connect(self.ui.StartButton, SIGNAL('clicked()'), self.start)
     def wybierz(self):
