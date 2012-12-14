@@ -108,13 +108,15 @@ def whos_da_killa(killers, texters, osoba, miejsce):
             if os in zd:
                 i_kill = zd.index(os)
                 for i in zd:
-                    if i[0].isupper(): index_upper.append(zd.index(i))
+                    if i[0].isupper(): index_upper.append(zd.index(i)) #indeks pierwszego wystapienia
                 for i in index_upper:
-                    if abs(i-i_kill) <3 : #gimmi just a lil bit love
+                    if abs(i-i_kill) <3: #gimmi just a lil bit love
                         if zd[i] in fullname: continue
                         elif zd[i] not in osoba and zd[i] not in miejsce: fullname.append(zd[i])
                         else: fullname=[];break
             if fullname: break
+        index_upper = []
+    print(fullname)
     ret = ' '.join([base_form(elem) for elem in fullname])
     if ret: print('Nazwisko zabójcy', '<font color="red">'+ret+'</font>', file=open('temp','a'))
     #print(ret)
