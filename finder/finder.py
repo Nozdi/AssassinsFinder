@@ -84,10 +84,11 @@ def bloody_shot(zdania, osoba, miejsce):
             tmp = elem[1][elem[1].find(elem[0])+len(elem[0])+1:]
         elif 'zabił' in elem[1]:
             tmp = elem[1]
+            #print(tmp)
             #tmp = elem[1][:elem[1].find(elem[0])]
         else: continue
         for slowo in tmp.split():
-            slowo = slowo.rstrip(',"')
+            slowo = slowo.rstrip(',"?')
             if not slowo: continue
             if slowo[0].isupper() and slowo not in osoba and slowo not in miejsce and base_form(slowo) not in open("./bazy/dane.miast").read().split("\n"):
                 killer.append(slowo)
