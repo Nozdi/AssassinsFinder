@@ -2,7 +2,12 @@ from .finder import base_form
 from .finder import odmiany_synonimow
 
 class Question:
-    """Potwierdza presupozycje pytania"""
+    """Potwierdza presupozycje pytan:
+        1) Kto zabił X w Y?
+        2) Kiedy zginal X? 
+        3) Gdzie zginal X?
+        4) Jak zginal X?
+        """
     def __init__(self, zdanie = ""):
         self.zdanie = zdanie.replace("?","")
         self.name = ''

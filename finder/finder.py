@@ -83,7 +83,8 @@ def bloody_shot(zdania, osoba, miejsce):
         elif 'przez' in elem[1]:
             tmp = elem[1][elem[1].find(elem[0])+len(elem[0])+1:]
         elif 'zabił' in elem[1]:
-            tmp = elem[1][:elem[1].find(elem[0])]
+            tmp = elem[1]
+            #tmp = elem[1][:elem[1].find(elem[0])]
         else: continue
         for slowo in tmp.split():
             slowo = slowo.rstrip(',"')
