@@ -112,7 +112,10 @@ def whos_da_killa(killers, texters, osoba, miejsce):
                 for i in index_upper:
                     if abs(i-i_kill) <3: #gimmi just a lil bit love
                         if zd[i] in fullname: continue
-                        elif zd[i] not in osoba and zd[i] not in miejsce: fullname.append(zd[i])
+                        elif zd[i] not in osoba and zd[i] not in miejsce: 
+                            if abs(i-i_kill)<2: fullname.append(zd[i])
+                            elif i>i_kill and zd[i-1] in index_upper: fullname.append(zd[i])
+                            elif i<i_kill: fullname.append(zd[i])
                         else: fullname=[];break
             if fullname: break
         index_upper = []
