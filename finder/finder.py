@@ -84,9 +84,8 @@ def bloody_shot(zdania, osoba, miejsce):
             tmp = elem[1][elem[1].find(elem[0])+len(elem[0])+1:]
         elif 'zabił' in elem[1]:
             tmp = elem[1]
-            #print(tmp)
-            #tmp = elem[1][:elem[1].find(elem[0])]
-        else: continue
+        else:
+            continue
         for slowo in tmp.split():
             slowo = slowo.rstrip(',"?')
             if not slowo: continue
@@ -101,6 +100,7 @@ def whos_da_killa(killers, texters, osoba, miejsce):
     biggest = x.most_common()[0][1]
     szuk =  [os for os, liczba in x.most_common() if liczba == biggest]
     candidates = []
+    ret = ''
     for krotka in texters:
         zd = noUpperspliter(krotka[1])
         for os in szuk:
@@ -121,6 +121,5 @@ def noUpperspliter(text):
         else:
             if pomocnikow: new_list.append(" ".join(pomocnikow))
             pomocnikow = []
-#            new_list.append(slowo)
     if pomocnikow: new_list.append(" ".join(pomocnikow))
     return new_list
