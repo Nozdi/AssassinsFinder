@@ -99,29 +99,27 @@ def whos_da_killa(killers, texters, osoba, miejsce):
     import collections
     x = collections.Counter(killers)
     biggest = x.most_common()[0][1]
-    szuk =  [os for os, liczba in x.most_common() if liczba == biggest]
-    fullname = []
-    index_upper = []
+    szuk =  [os for os, liczba in x.most_common() if liczba == biggest][0]
+    candidates=[]
     for krotka in texters:
-        zd = [slowo.rstrip(',.') for slowo in krotka[1].split()]
-        for os in szuk:
-            if os in zd:
-                i_kill = zd.index(os)
-                for i in zd:
-                    if i[0].isupper(): index_upper.append(zd.index(i)) #indeks pierwszego wystapienia
-                for i in index_upper:
-                    if abs(i-i_kill) <3: #gimmi just a lil bit love
-                        if zd[i] in fullname: continue
-                        elif zd[i] not in osoba and zd[i] not in miejsce: 
-                            if abs(i-i_kill)<2: fullname.append(zd[i])
-                            elif i>i_kill and zd[i-1] in index_upper: fullname.append(zd[i])
-                            elif i<i_kill: fullname.append(zd[i])
-                        else: fullname=[];break
-            if fullname: break
-        index_upper = []
-    print(fullname)
-    ret = ' '.join([base_form(elem) for elem in fullname])
-    if ret: print('Nazwisko zabójcy', '<font color="red">'+ret+'</font>', file=open('temp','a'))
-    #print(ret)
+        zd = noUpperspliter(krotka[1])[1:]
+        for wyrazenie in zd:
+            if szuk in wyrazenie: candidates.append(wyrazenie)
+        if candidates: ret = ' '.join([base_form(elem) for elem in max(candidates, key=len).split()])
+        else: ret=[]
+    if ret: print('Nazwisko zabójcy', '<font color="red">'+str(ret)+'</font>', file=open('temp','a'))
     return ret
 
+def noUpperspliter(text):
+    usual = text.split()
+    new_list = []
+    pomocnikow = []
+    for slowo in usual:
+        if slowo[0].isupper():
+            pomocnikow.append(slowo.rstrip(",-?.!'"))
+        else:
+            if pomocnikow: new_list.append(" ".join(pomocnikow))
+            pomocnikow = []
+            new_list.append(slowo)
+    if pomocnikow: new_list.append(" ".join(pomocnikow))
+    return new_list
