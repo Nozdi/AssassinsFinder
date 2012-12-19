@@ -99,19 +99,20 @@ def whos_da_killa(killers, texters, osoba, miejsce):
     import collections
     x = collections.Counter(killers)
     biggest = x.most_common()[0][1]
-    szuk =  [os for os, liczba in x.most_common() if liczba == biggest][0]
-    candidates=[]
+    szuk =  [os for os, liczba in x.most_common() if liczba == biggest]
+    candidates = []
     for krotka in texters:
-        zd = noUpperspliter(krotka[1])[1:]
-        for wyrazenie in zd:
-            if szuk in wyrazenie: candidates.append(wyrazenie)
-        if candidates: ret = ' '.join([base_form(elem) for elem in max(candidates, key=len).split()])
-        else: ret=[]
+        zd = noUpperspliter(krotka[1])
+        for os in szuk:
+            for wyrazenie in zd:
+                if os in wyrazenie and not osoba[0] in wyrazenie: candidates.append(wyrazenie)
+            if candidates: ret = ' '.join([base_form(elem) for elem in max(candidates, key=len).split()])
+            else: candidates = []
     if ret: print('Nazwisko zabójcy', '<font color="red">'+str(ret)+'</font>', file=open('temp','a'))
     return ret
 
 def noUpperspliter(text):
-    usual = text.split()
+    usual = text.split()[1:]
     new_list = []
     pomocnikow = []
     for slowo in usual:
@@ -120,6 +121,6 @@ def noUpperspliter(text):
         else:
             if pomocnikow: new_list.append(" ".join(pomocnikow))
             pomocnikow = []
-            new_list.append(slowo)
+#            new_list.append(slowo)
     if pomocnikow: new_list.append(" ".join(pomocnikow))
     return new_list
